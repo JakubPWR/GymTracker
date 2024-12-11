@@ -48,3 +48,11 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+npx expo start
+
+-packages to install
+npm install styled-components
+npm install @types/styled-components-react-native --save-dev
+npm install --save-dev --save-exact prettier
+npm install react-native-gesture-handler
