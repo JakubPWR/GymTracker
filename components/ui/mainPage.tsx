@@ -1,9 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Text, StyleSheet, TouchableOpacity, View } from "react-native";
 import SwipeGesture from "@/components/ui/SwipeGesture";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  GestureHandlerRootView,
+  ScrollView,
+} from "react-native-gesture-handler";
 import { DateContext, DateContextProvider } from "@/contexts/dateContext";
 import Example from "@/components/ui/test";
+import { router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Excercises from "./Excercises";
 export default function MainPage() {
   const { startDate, setStartDate, weekDays, goNextWeek, getWeekDays } =
     useContext(DateContext);
@@ -12,17 +18,15 @@ export default function MainPage() {
       <GestureHandlerRootView>
         <View style={styles.globalView}>
           <View style={styles.weekDaysBar}>
-            <Text style={styles.titleText}>Gym Tracker</Text>
             <SwipeGesture />
           </View>
-          <View style={styles.excercisesRow}></View>
-          <View style={styles.navbar}>
-            <TouchableOpacity
-              onPress={() => setStartDate(goNextWeek(startDate))}
-            >
-              <Text>Next Week</Text>
-            </TouchableOpacity>
-          </View>
+          <ScrollView
+            style={styles.excercisesRow}
+            contentContainerStyle={styles.excercisesContainerRow}
+          >
+            <Excercises />
+          </ScrollView>
+          <View style={styles.navbar}></View>
         </View>
       </GestureHandlerRootView>
     </>
@@ -41,7 +45,7 @@ const styles = StyleSheet.create({
   globalView: {
     display: "flex",
     flexDirection: "column",
-    flexGrow: 1,
+    flex: 1,
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
@@ -78,8 +82,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   excercisesRow: {
-    flex: 13,
+    flexGrow: 13,
     width: "100%",
+  },
+  excercisesContainerRow: {
+    flex: 1,
   },
   safeArea: {
     backgroundColor: "#6a1e55",
